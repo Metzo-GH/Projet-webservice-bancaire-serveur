@@ -6,7 +6,6 @@ import java.util.Calendar;
 
 import alom.bank.server.exception.client.ClientDejaExistantException;
 import alom.bank.server.exception.client.ClientInexistantException;
-import alom.bank.server.exception.client.ClientNotFoundException;
 import alom.bank.server.exception.compte.CompteDejaExistantException;
 import alom.bank.server.exception.compte.CompteInexistantException;
 import alom.bank.server.exception.compte.TypeCompteInvalideException;
@@ -20,7 +19,7 @@ public interface BankService {
     Client creerClient(String prenom, String nom, Calendar DateNaissance) throws ClientDejaExistantException;
 
     @WebMethod
-    Client recupererClient(String prenom, String nom, Calendar DateNaissance) throws ClientNotFoundException;
+    Client recupererClient(String prenom, String nom, Calendar DateNaissance) throws ClientInexistantException;
 
     @WebMethod
     Compte creerCompte(Client client, TypeCompte typeCompte) throws ClientInexistantException, TypeCompteInvalideException, CompteDejaExistantException;

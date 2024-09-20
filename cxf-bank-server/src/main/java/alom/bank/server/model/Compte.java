@@ -1,32 +1,22 @@
 package alom.bank.server.model;
 
 public class Compte {
-    private String numeroCompte; // Numéro de compte
-    private Client titulaire; // Titulaire du compte
-    private TypeCompte typeCompte; // Type de compte
+    private Client client;
+    private TypeCompte typeCompte;
 
     // Constructeur
-    public Compte(String numeroCompte, Client titulaire, TypeCompte typeCompte) {
-        this.numeroCompte = numeroCompte;
-        this.titulaire = titulaire;
+    public Compte(Client client, TypeCompte typeCompte) {
+        this.client = client;
         this.typeCompte = typeCompte;
     }
 
     // Getters et Setters
-    public String getNumeroCompte() {
-        return numeroCompte;
+    public Client getClient() {
+        return client;
     }
 
-    public void setNumeroCompte(String numeroCompte) {
-        this.numeroCompte = numeroCompte;
-    }
-
-    public Client getTitulaire() {
-        return titulaire;
-    }
-
-    public void setTitulaire(Client titulaire) {
-        this.titulaire = titulaire;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public TypeCompte getTypeCompte() {
@@ -36,4 +26,6 @@ public class Compte {
     public void setTypeCompte(TypeCompte typeCompte) {
         this.typeCompte = typeCompte;
     }
+
+    // Autres méthodes si nécessaire
 }
