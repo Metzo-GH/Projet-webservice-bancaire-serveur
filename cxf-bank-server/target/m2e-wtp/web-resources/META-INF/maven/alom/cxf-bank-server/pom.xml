@@ -5,8 +5,8 @@
     <artifactId>cxf-bank-server</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>Simple CXF Java-first SOAP project using Spring configuration</name>
-    <description>Simple CXF Java-first SOAP project using Spring configuration</description>
+    <name>Création d'un webservice bancaire (serveur)</name>
+    <description>Création d'un webservice bancaire (serveur)</description>
     <dependencies>
         <dependency>
             <groupId>org.apache.cxf</groupId>
