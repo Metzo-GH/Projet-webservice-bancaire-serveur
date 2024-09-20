@@ -6,6 +6,8 @@ import alom.bank.server.model.TypeCompte;
 import alom.bank.server.exception.client.ClientDejaExistantException;
 import alom.bank.server.exception.client.ClientInexistantException;
 import alom.bank.server.exception.compte.TypeCompteInvalideException;
+import alom.bank.server.exception.solde.DecouvertNonAutoriseException;
+import alom.bank.server.exception.solde.MontantInvalideException;
 import alom.bank.server.exception.compte.CompteDejaExistantException;
 import alom.bank.server.exception.compte.CompteInexistantException;
 import jakarta.jws.WebService;
@@ -49,7 +51,6 @@ public class BankServiceImpl implements BankService {
             throw new TypeCompteInvalideException("Le type de compte spécifié n'existe pas.");
         }
 
-        // Créer un compte s'il n'existe pas déjà
         return comptes.computeIfAbsent(client, k -> new HashMap<>()).computeIfAbsent(typeCompte, k -> {
             Compte compte = new Compte(client, typeCompte);
             return compte;
@@ -71,4 +72,43 @@ public class BankServiceImpl implements BankService {
         }
         return compte;
     }
+
+    @Override
+    public double ajouterArgent(Compte compte, double montant) throws CompteInexistantException {
+        if (compte == null || !comptes.values().stream().anyMatch(map -> map.containsKey(compte.getTypeCompte()))) {
+            throw new CompteInexistantException("Le compte en banque spécifié n'existe pas.");
+        }
+        if (montant <= 0) {
+            throw new IllegalArgumentException("La somme à rajouter doit être supérieure à zéro.");
+        }
+
+        compte.ajouterSolde(montant);
+        return compte.getSolde();
+    }
+
+    @Override
+    public double connaitreSolde(Compte compte) throws CompteInexistantException {
+        if (compte == null || !comptes.values().stream().anyMatch(map -> map.containsKey(compte.getTypeCompte()))) {
+            throw new CompteInexistantException("Le compte spécifié n'existe pas.");
+        }
+        return compte.getSolde();
+    }
+
+    @Override
+    public double retirerArgent(Compte compte, double montant) throws CompteInexistantException, MontantInvalideException, DecouvertNonAutoriseException {
+        if (compte == null || !comptes.values().stream().anyMatch(map -> map.containsValue(compte))) {
+            throw new CompteInexistantException("Le compte spécifié n'existe pas.");
+        }
+        if (montant <= 0) {
+            throw new MontantInvalideException("Le montant à retirer doit être positif.");
+        }
+        if (compte.getSolde() < montant) {
+            throw new DecouvertNonAutoriseException("Le retrait n'est pas autorisé, le compte n'a pas suffisamment de fonds.");
+        }
+    
+        compte.retirerSolde(montant);
+        return compte.getSolde();
+    }
+    
+
 }
