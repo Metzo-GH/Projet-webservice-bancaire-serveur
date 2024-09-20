@@ -15,15 +15,28 @@ public class Client {
     }
 
     // Getters
-    public String getprenom() {
+    public String getPrenom() {
         return prenom;
     }
 
-    public String getnom() {
+    public String getNom() {
         return nom;
     }
 
     public Calendar getDateNaissance() {
         return DateNaissance;
+    }
+
+    // Setters
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setDateNaissance(Calendar dateNaissance) {
+        this.DateNaissance = dateNaissance;
     }
 }
