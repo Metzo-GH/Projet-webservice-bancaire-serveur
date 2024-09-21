@@ -9,6 +9,8 @@ import alom.bank.server.exception.client.ClientInexistantException;
 import alom.bank.server.exception.compte.CompteDejaExistantException;
 import alom.bank.server.exception.compte.CompteInexistantException;
 import alom.bank.server.exception.compte.TypeCompteInvalideException;
+import alom.bank.server.exception.solde.MontantInvalideException;
+import alom.bank.server.exception.solde.DecouvertNonAutoriseException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -41,9 +43,19 @@ public class BankServiceImplTest {
     }
 
     @Test
+    public void testCreerCompte() {
+        try {
+            Client client = bankService.creerClient("John", "Doe", Calendar.getInstance());
+            Compte compte = bankService.creerCompte(client, TypeCompte.CHEQUES);
+            assertNotNull(compte);
+        } catch (ClientDejaExistantException | TypeCompteInvalideException | CompteDejaExistantException | ClientInexistantException e) {
+            fail("Exception should not be thrown");
+        }
+    }
+
+    @Test
     public void testAjouterArgent() {
         try {
-            // Ajoutez un client et un compte d'abord
             Client client = bankService.creerClient("John", "Doe", Calendar.getInstance());
             Compte compte = bankService.creerCompte(client, TypeCompte.CHEQUES);
             double nouveauSolde = bankService.ajouterArgent(compte, 100.0);
@@ -53,5 +65,30 @@ public class BankServiceImplTest {
         }
     }
 
-    // Ajoutez des tests similaires pour les autres méthodes
+    @Test
+    public void testRetirerArgent() {
+        try {
+            Client client = bankService.creerClient("John", "Doe", Calendar.getInstance());
+            Compte compte = bankService.creerCompte(client, TypeCompte.CHEQUES);
+            bankService.ajouterArgent(compte, 100.0);
+            double nouveauSolde = bankService.retirerArgent(compte, 50.0);
+            assertEquals(50.0, nouveauSolde);
+        } catch (ClientDejaExistantException | CompteDejaExistantException | TypeCompteInvalideException | CompteInexistantException | MontantInvalideException | DecouvertNonAutoriseException | ClientInexistantException e) {
+            fail("Exception should not be thrown");
+        }
+    }
+
+    // Ajout d'un test pour la vérification des exceptions (exemple pour CompteInexistantException)
+    @Test
+    public void testRetirerArgent_CompteInexistant() {
+        try {
+            Compte compte = new Compte(null, TypeCompte.CHEQUES); // Compte sans client
+            bankService.retirerArgent(compte, 50.0);
+            fail("Should have thrown CompteInexistantException");
+        } catch (CompteInexistantException e) {
+            // Test réussi si l'exception est levée
+        } catch (Exception e) {
+            fail("Unexpected exception: " + e);
+        }
+    }
 }

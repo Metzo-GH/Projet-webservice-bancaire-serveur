@@ -21,9 +21,18 @@ public class BankServiceImpl implements BankService {
     private final Map<String, Client> clients = new HashMap<>();
     private final Map<Client, Map<TypeCompte, Compte>> comptes = new HashMap<>();
 
+    private String generateClientKey(String prenom, String nom, Calendar dateNaissance) {
+        return prenom + nom + dateNaissance.get(Calendar.YEAR) 
+               + dateNaissance.get(Calendar.MONTH) 
+               + dateNaissance.get(Calendar.DAY_OF_MONTH) 
+               + dateNaissance.get(Calendar.HOUR_OF_DAY) 
+               + dateNaissance.get(Calendar.MINUTE);
+    }
+    
+
     @Override
     public Client creerClient(String prenom, String nom, Calendar dateNaissance) throws ClientDejaExistantException {
-        String key = prenom + nom + dateNaissance.getTimeInMillis();
+        String key = generateClientKey(prenom, nom, dateNaissance); // Clé basée sur les minutes
         if (clients.containsKey(key)) {
             throw new ClientDejaExistantException("Un client avec ces informations existe déjà.");
         }
@@ -31,16 +40,17 @@ public class BankServiceImpl implements BankService {
         clients.put(key, client);
         return client;
     }
-
+    
     @Override
     public Client recupererClient(String prenom, String nom, Calendar dateNaissance) throws ClientInexistantException {
-        String key = prenom + nom + dateNaissance.getTimeInMillis();
+        String key = generateClientKey(prenom, nom, dateNaissance); // Clé basée sur les minutes
         Client client = clients.get(key);
         if (client == null) {
             throw new ClientInexistantException("Aucun client trouvé avec ces informations.");
         }
         return client;
     }
+    
 
     @Override
     public Compte creerCompte(Client client, TypeCompte typeCompte) throws TypeCompteInvalideException, CompteDejaExistantException, ClientInexistantException {
