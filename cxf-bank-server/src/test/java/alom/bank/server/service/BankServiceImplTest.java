@@ -10,6 +10,7 @@ import alom.bank.server.exception.compte.CompteDejaExistantException;
 import alom.bank.server.exception.compte.CompteInexistantException;
 import alom.bank.server.exception.compte.TypeCompteInvalideException;
 import alom.bank.server.exception.solde.MontantInvalideException;
+import alom.bank.server.front.BankServiceImpl;
 import alom.bank.server.exception.solde.DecouvertNonAutoriseException;
 
 import static org.junit.jupiter.api.Assertions.*;
