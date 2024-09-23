@@ -1,4 +1,4 @@
-package alom.bank.server.front;
+package alom.bank.server.service;
 
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
