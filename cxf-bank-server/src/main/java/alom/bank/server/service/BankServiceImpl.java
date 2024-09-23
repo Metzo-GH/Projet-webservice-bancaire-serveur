@@ -16,7 +16,7 @@ import alom.bank.server.model.Compte;
 import alom.bank.server.model.TypeCompte;
 import jakarta.jws.WebService;
 
-@WebService
+@WebService(endpointInterface = "alom.bank.server.service.BankService")
 public class BankServiceImpl implements BankService {
     
     private final ClientManager clientManager = new ClientManager();
