@@ -7,6 +7,9 @@ public class Client {
     private String nom;
     private Calendar DateNaissance;
 
+    // Constructeur par défaut requis par JAXB
+    public Client() {}
+
     // Constructeur
     public Client(String prenom, String nom, Calendar DateNaissance) {
         this.prenom = prenom;

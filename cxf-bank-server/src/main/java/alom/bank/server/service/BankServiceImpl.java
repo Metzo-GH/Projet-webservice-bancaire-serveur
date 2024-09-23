@@ -14,7 +14,9 @@ import alom.bank.server.middle.OperationManager;
 import alom.bank.server.model.Client;
 import alom.bank.server.model.Compte;
 import alom.bank.server.model.TypeCompte;
+import jakarta.jws.WebService;
 
+@WebService
 public class BankServiceImpl implements BankService {
     
     private final ClientManager clientManager = new ClientManager();

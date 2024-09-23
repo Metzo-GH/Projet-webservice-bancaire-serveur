@@ -5,6 +5,9 @@ public class Compte {
     private TypeCompte typeCompte;
     private double solde; // Ajout de la propriété solde
 
+    // Constructeur par défaut requis par JAXB
+    public Compte() {}
+
     // Constructeur
     public Compte(Client client, TypeCompte typeCompte) {
         this.client = client;
