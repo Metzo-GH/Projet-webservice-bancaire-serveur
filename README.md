@@ -3,3 +3,4 @@
 - maven
 - cxf librairie
 - tomcat 10.1
+- ws import
