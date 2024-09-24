@@ -5,8 +5,8 @@
     <artifactId>cxf-bank-client</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>Webservice bancaire client</name>
-    <description>Webservice bancaire client</description>
+    <name>webservice Client</name>
+    <description>webservice Client</description>
     <dependencies>
         <dependency>
             <groupId>org.apache.cxf</groupId>
@@ -29,16 +29,6 @@
             <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>jakarta.xml.bind</groupId>
-            <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>3.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
-            <version>3.0.2</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -48,16 +38,18 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <configuration>
-                        <source>1.8</source>
-                        <target>1.8</target>
+                        <source>11</source>
+                        <target>11</target>
                     </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-eclipse-plugin</artifactId>
                     <configuration>
+                        <projectNameTemplate>[artifactId]-[version]</projectNameTemplate>
                         <wtpmanifest>true</wtpmanifest>
                         <wtpapplicationxml>true</wtpapplicationxml>
+                        <wtpversion>2.0</wtpversion>
                     </configuration>
                 </plugin>
             </plugins>

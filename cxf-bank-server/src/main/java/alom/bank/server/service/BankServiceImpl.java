@@ -14,7 +14,9 @@ import alom.bank.server.middle.OperationManager;
 import alom.bank.server.model.Client;
 import alom.bank.server.model.Compte;
 import alom.bank.server.model.TypeCompte;
+import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
+import jakarta.jws.WebParam;
 
 @WebService(endpointInterface = "alom.bank.server.service.BankService")
 public class BankServiceImpl implements BankService {
@@ -23,41 +25,66 @@ public class BankServiceImpl implements BankService {
     private final CompteManager compteManager = new CompteManager();
     private final OperationManager operationManager = new OperationManager();
 
+    @WebMethod
     @Override
-    public Client creerClient(String prenom, String nom, Calendar dateNaissance) throws ClientDejaExistantException {
+    public Client creerClient(
+        @WebParam(name = "prenom") String prenom, 
+        @WebParam(name = "nom") String nom, 
+        @WebParam(name = "DateNaissance") Calendar dateNaissance) 
+        throws ClientDejaExistantException {
         return clientManager.creerClient(prenom, nom, dateNaissance);
     }
 
+    @WebMethod
     @Override
-    public Client recupererClient(String prenom, String nom, Calendar dateNaissance) throws ClientInexistantException {
+    public Client recupererClient(
+        @WebParam(name = "prenom") String prenom, 
+        @WebParam(name = "nom") String nom, 
+        @WebParam(name = "DateNaissance") Calendar dateNaissance) 
+        throws ClientInexistantException {
         return clientManager.recupererClient(prenom, nom, dateNaissance);
     }
 
+    @WebMethod
     @Override
-    public Compte creerCompte(Client client, TypeCompte typeCompte) 
+    public Compte creerCompte(
+        @WebParam(name = "client") Client client, 
+        @WebParam(name = "typeCompte") TypeCompte typeCompte) 
         throws ClientInexistantException, TypeCompteInvalideException, CompteDejaExistantException {
         return compteManager.creerCompte(client, typeCompte);
     }
 
+    @WebMethod
     @Override
-    public Compte recupererCompte(Client client, TypeCompte typeCompte) 
+    public Compte recupererCompte(
+        @WebParam(name = "client") Client client, 
+        @WebParam(name = "typeCompte") TypeCompte typeCompte) 
         throws ClientInexistantException, TypeCompteInvalideException, CompteInexistantException {
         return compteManager.recupererCompte(client, typeCompte);
     }
 
+    @WebMethod
     @Override
-    public double ajouterArgent(Compte compte, double somme) 
+    public double ajouterArgent(
+        @WebParam(name = "compte") Compte compte, 
+        @WebParam(name = "somme") double somme) 
         throws CompteInexistantException, IllegalArgumentException {
         return operationManager.ajouterArgent(compte, somme);
     }
 
+    @WebMethod
     @Override
-    public double connaitreSolde(Compte compte) throws CompteInexistantException {
+    public double connaitreSolde(
+        @WebParam(name = "compte") Compte compte) 
+        throws CompteInexistantException {
         return operationManager.connaitreSolde(compte);
     }
 
+    @WebMethod
     @Override
-    public double retirerArgent(Compte compte, double montant) 
+    public double retirerArgent(
+        @WebParam(name = "compte") Compte compte, 
+        @WebParam(name = "montant") double montant) 
         throws CompteInexistantException, MontantInvalideException, DecouvertNonAutoriseException {
         return operationManager.retirerArgent(compte, montant);
     }
