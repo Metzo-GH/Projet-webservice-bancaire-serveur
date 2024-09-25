@@ -21,9 +21,9 @@ public class OperationManager {
             throw new IllegalArgumentException("Le montant à ajouter doit être positif.");
         }
 
-        // Utilisation de la méthode ajouterSolde pour mettre à jour le solde
-        compte.ajouterSolde(somme);
-        return compte.getSolde();
+        double nouveauSolde = compte.getSolde() + somme;
+        compte.setSolde(nouveauSolde); // Utilisation du setter pour modifier le solde
+        return nouveauSolde;
     }
 
     // Méthode pour connaître le solde d'un compte
@@ -58,8 +58,8 @@ public class OperationManager {
             throw new DecouvertNonAutoriseException("Le solde est insuffisant pour retirer cette somme.");
         }
 
-        // Utilisation de la méthode retirerSolde pour mettre à jour le solde
-        compte.retirerSolde(montant);
-        return compte.getSolde();
+        double nouveauSolde = compte.getSolde() - montant;
+        compte.setSolde(nouveauSolde);
+        return nouveauSolde;
     }
 }

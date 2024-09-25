@@ -3,7 +3,7 @@ package alom.bank.server.model;
 public class Compte {
     private Client client;
     private TypeCompte typeCompte;
-    private double solde; // Ajout de la propriété solde
+    private double solde;
 
     // Constructeur par défaut requis par JAXB
     public Compte() {}
@@ -36,12 +36,8 @@ public class Compte {
         return solde;
     }
 
-    public void ajouterSolde(double montant) {
-        this.solde += montant;
-    }
-
-    public void retirerSolde(double montant) {
-        this.solde -= montant; // Assurez-vous que "solde" est une propriété de la classe Compte.
+    public void setSolde(double solde) {
+        this.solde = solde;
     }
     
 }
