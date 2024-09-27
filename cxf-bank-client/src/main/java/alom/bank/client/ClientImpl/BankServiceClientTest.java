@@ -22,7 +22,7 @@ public class BankServiceClientTest {
             // Créer un client
             System.out.println("Création d'un nouveau client...");
             Calendar dateNaissance = Calendar.getInstance();
-            dateNaissance.set(1990, Calendar.JANUARY, 1); // Exemple de date de naissance
+            dateNaissance.set(1990, Calendar.JANUARY, 1);
 
             // Conversion de Calendar en XMLGregorianCalendar
             GregorianCalendar gregorianCalendar = new GregorianCalendar();
@@ -45,18 +45,19 @@ public class BankServiceClientTest {
 
             // Ajouter de l'argent au compte
             System.out.println("Ajout d'argent au compte...");
-            double nouveauSolde = service.ajouterArgent(compteClient, 1000.0); // Ajouter 1000€
-            System.out.println("Nouveau solde : " + nouveauSolde + "€");
+            compteClient = service.ajouterArgent(compteClient, 1000.0); // Ajouter 1000€
+            System.out.println("Nouveau solde : " + compteClient.getSolde() + "€");
 
             // Consulter le solde
             System.out.println("Consultation du solde...");
-            double solde = service.connaitreSolde(compteClient);
-            System.out.println("Solde actuel : " + solde + "€");
+            Compte compteMAJ = service.connaitreSolde(compteClient);
+            System.out.println("Solde actuel : " + compteMAJ.getSolde() + "€");
 
             // Retirer de l'argent
             System.out.println("Retrait d'argent...");
-            double soldeApresRetrait = service.retirerArgent(compteClient, 500.0); // Retirer 500€
-            System.out.println("Nouveau solde après retrait : " + soldeApresRetrait + "€");
+            compteMAJ = service.retirerArgent(compteClient, 500.0); // Retirer 500€
+            System.out.println("Nouveau solde après retrait : " + compteMAJ.getSolde() + "€");
+
 
         } catch (Exception e) {
             System.err.println("Une erreur est survenue lors de l'appel au WebService : " + e.getMessage());

@@ -8,7 +8,7 @@ import alom.bank.server.model.Compte;
 public class OperationManager {
 
     // Méthode pour ajouter de l'argent sur un compte
-    public double ajouterArgent(Compte compte, double somme) 
+    public Compte ajouterArgent(Compte compte, double somme) 
         throws CompteInexistantException, IllegalArgumentException {
         
         // Validation du compte
@@ -22,12 +22,12 @@ public class OperationManager {
         }
 
         double nouveauSolde = compte.getSolde() + somme;
-        compte.setSolde(nouveauSolde); // Utilisation du setter pour modifier le solde
-        return nouveauSolde;
+        compte.setSolde(nouveauSolde);
+        return compte;
     }
 
     // Méthode pour connaître le solde d'un compte
-    public double connaitreSolde(Compte compte) 
+    public Compte connaitreSolde(Compte compte) 
         throws CompteInexistantException {
         
         // Validation du compte
@@ -36,11 +36,11 @@ public class OperationManager {
         }
 
         // Retourner le solde du compte
-        return compte.getSolde();
+        return compte;
     }
 
     // Méthode pour retirer de l'argent d'un compte
-    public double retirerArgent(Compte compte, double montant) 
+    public Compte retirerArgent(Compte compte, double montant) 
         throws CompteInexistantException, MontantInvalideException, DecouvertNonAutoriseException {
 
         // Validation du compte
@@ -60,6 +60,6 @@ public class OperationManager {
 
         double nouveauSolde = compte.getSolde() - montant;
         compte.setSolde(nouveauSolde);
-        return nouveauSolde;
+        return compte;
     }
 }

@@ -46,18 +46,18 @@ public interface BankService {
         throws ClientInexistantException, TypeCompteInvalideException, CompteInexistantException;
 
     @WebMethod
-    double ajouterArgent(
+    Compte ajouterArgent(
         @WebParam(name = "compte") Compte compte, 
         @WebParam(name = "somme") double somme) 
         throws CompteInexistantException, IllegalArgumentException;
     
     @WebMethod
-    double connaitreSolde(
+    Compte connaitreSolde(
         @WebParam(name = "compte") Compte compte) 
         throws CompteInexistantException;
 
     @WebMethod
-    double retirerArgent(
+    Compte retirerArgent(
         @WebParam(name = "compte") Compte compte, 
         @WebParam(name = "montant") double montant) 
         throws CompteInexistantException, MontantInvalideException, DecouvertNonAutoriseException;

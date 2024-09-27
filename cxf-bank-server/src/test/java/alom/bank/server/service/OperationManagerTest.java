@@ -28,8 +28,8 @@ public class OperationManagerTest {
 
     @Test
     public void testAjouterArgent() throws CompteInexistantException, IllegalArgumentException {
-        double nouveauSolde = operationManager.ajouterArgent(compte, 100.0);
-        assertEquals(100.0, nouveauSolde);
+        operationManager.ajouterArgent(compte, 100.0);
+        assertEquals(100.0, compte.getSolde());
     }
 
     @Test
@@ -42,15 +42,15 @@ public class OperationManagerTest {
     @Test
     public void testConnaitreSolde() throws CompteInexistantException {
         operationManager.ajouterArgent(compte, 100.0);
-        double solde = operationManager.connaitreSolde(compte);
-        assertEquals(100.0, solde);
+        operationManager.connaitreSolde(compte);
+        assertEquals(100.0, compte.getSolde());
     }
 
     @Test
     public void testRetirerArgent() throws CompteInexistantException, MontantInvalideException, DecouvertNonAutoriseException {
         operationManager.ajouterArgent(compte, 100.0);
-        double nouveauSolde = operationManager.retirerArgent(compte, 50.0);
-        assertEquals(50.0, nouveauSolde);
+        operationManager.retirerArgent(compte, 50.0);
+        assertEquals(50.0, compte.getSolde());
     }
 
     @Test

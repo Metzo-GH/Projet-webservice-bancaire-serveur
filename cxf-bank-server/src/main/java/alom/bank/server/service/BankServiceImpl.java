@@ -65,7 +65,7 @@ public class BankServiceImpl implements BankService {
 
     @WebMethod
     @Override
-    public double ajouterArgent(
+    public Compte ajouterArgent(
         @WebParam(name = "compte") Compte compte, 
         @WebParam(name = "somme") double somme) 
         throws CompteInexistantException, IllegalArgumentException {
@@ -74,7 +74,7 @@ public class BankServiceImpl implements BankService {
 
     @WebMethod
     @Override
-    public double connaitreSolde(
+    public Compte connaitreSolde(
         @WebParam(name = "compte") Compte compte) 
         throws CompteInexistantException {
         return operationManager.connaitreSolde(compte);
@@ -82,7 +82,7 @@ public class BankServiceImpl implements BankService {
 
     @WebMethod
     @Override
-    public double retirerArgent(
+    public Compte retirerArgent(
         @WebParam(name = "compte") Compte compte, 
         @WebParam(name = "montant") double montant) 
         throws CompteInexistantException, MontantInvalideException, DecouvertNonAutoriseException {
